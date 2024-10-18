@@ -17,4 +17,4 @@ This is a library for parsing data from Eufy smart scales that use the EufyLife 
 
 Install this via pip:
 
-`pip install eufylife-ble`
+`pip install eufylife_ble`

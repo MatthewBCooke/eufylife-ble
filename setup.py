@@ -6,4 +6,4 @@
 import setuptools
 
 if __name__ == "__main__":
-    setuptools.setup(name="eufylife-ble")
+    setuptools.setup(name="eufylife_ble")

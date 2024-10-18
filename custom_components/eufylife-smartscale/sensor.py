@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from eufylife-ble import MODEL_TO_NAME
+from eufylife_ble import MODEL_TO_NAME
 
 from homeassistant import config_entries
 from homeassistant.components.bluetooth import async_address_present

@@ -27,6 +27,6 @@
   "documentation": "https://www.home-assistant.io/integrations/eufylife_ble",
   "integration_type": "device",
   "iot_class": "local_push",
-  "requirements": ["eufylife-ble==0.2.0"],
+  "requirements": ["eufylife_ble==0.2.0"],
   "version": "0.2.0"
 }
