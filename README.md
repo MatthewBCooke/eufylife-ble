@@ -11,6 +11,7 @@ This is a library for parsing data from Eufy smart scales that use the EufyLife 
 | T9147 | Smart Scale P1     |
 | T9148 | Smart Scale P2     |
 | T9149 | Smart Scale P2 Pro |
+| T9150 | Smart Scale P3     |
 
 ## Installation
 

@@ -21,6 +21,7 @@ MODEL_TO_NAME = {
     "eufy T9147": "Smart Scale P1",
     "eufy T9148": "Smart Scale P2",
     "eufy T9149": "Smart Scale P2 Pro",
+    "eufy T9150": "Smart Scale P3",
 }
 
 MODELS: dict[str, DeviceModel] = {
@@ -58,6 +59,14 @@ MODELS: dict[str, DeviceModel] = {
     ),
     "eufy T9149": DeviceModel(
         name="Smart Scale P2 Pro",
+        advertisement_data_contains_state=True,
+        auth_characteristics=["0000FFF4-0000-1000-8000-00805f9b34fb"],
+        notify_characteristics=["0000FFF2-0000-1000-8000-00805f9b34fb"],
+        write_characteristics=["0000FFF1-0000-1000-8000-00805f9b34fb"],
+        battery_characteristics=["00002A19-0000-1000-8000-00805f9b34fb"]
+    ),
+    "eufy T9150": DeviceModel(
+        name="Smart Scale P3",
         advertisement_data_contains_state=True,
         auth_characteristics=["0000FFF4-0000-1000-8000-00805f9b34fb"],
         notify_characteristics=["0000FFF2-0000-1000-8000-00805f9b34fb"],
@@ -113,7 +122,9 @@ class EufyLifeBLEDevice:
     @property
     def supports_heart_rate(self) -> bool:
         """Return whether the device supports heart rate measurements."""
-        return self._model_id == "eufy T9149"
+        if self._model_id == "eufy T9149" or self._model_id == "eufy T9150":
+            return True 
+        return False
 
     @property
     def is_connected(self) -> bool:
@@ -208,7 +219,7 @@ class EufyLifeBLEDevice:
             await self._authenticate_if_needed()
 
     async def _authenticate_if_needed(self):
-        if self._model_id not in ["eufy T9148", "eufy T9149"]:
+        if self._model_id not in ["eufy T9148", "eufy T9149", "eufy T9150"]:
             return
 
         self._auth_handler = AuthHandler(self._ble_device.address, self._loop)
@@ -248,11 +259,11 @@ class EufyLifeBLEDevice:
                 data_range = data[4:15]
                 if util.validate_checksum(data_range):
                     self._handle_weight_update_t9146_t9147(data_range)
-        elif self._model_id in ["eufy T9148", "eufy T9149"]:
+        elif self._model_id in ["eufy T9148", "eufy T9149", "eufy T9150"]:
             if len(data) == 19 and data[6] == 0xCF:
-                self._handle_advertisement_weight_update_t9148_t9149(data[6:])
+                self._handle_advertisement_weight_update_t9148_t9149_t9150(data[6:])
 
-    def _handle_advertisement_weight_update_t9148_t9149(self, data: bytearray) -> None:
+    def _handle_advertisement_weight_update_t9148_t9149_t9150(self, data: bytearray) -> None:
         weight_kg = ((data[4] << 8) | data[3]) / 100
         is_final = data[9] == 0x00
         final_weight_kg = weight_kg if is_final else None
@@ -284,7 +295,7 @@ class EufyLifeBLEDevice:
 
         self._set_state_and_fire_callbacks(EufyLifeBLEState(weight_kg, final_weight_kg, None, weight_limit_exceeded))
 
-    def _handle_weight_update_t9148_t9149(self, data: bytearray) -> None:
+    def _handle_weight_update_t9148_t9149_t9150(self, data: bytearray) -> None:
         if len(data) != 16 or data[0] != 0xCF or data[2] != 0x00:
             return
 
@@ -299,7 +310,7 @@ class EufyLifeBLEDevice:
         """Handle notification responses on the auth characteristic."""
         _LOGGER.debug("%s: Auth notification received: %s", self._model_id, data.hex())
 
-        if self._model_id in ["eufy T9148", "eufy T9149"]:
+        if self._model_id in ["eufy T9148", "eufy T9149", "eufy T9150"]:
             if data[0] == 0xC1:
                 self._auth_handler.handle_c1(data)
             elif data[0] == 0xC3:
@@ -326,9 +337,9 @@ class EufyLifeBLEDevice:
                 return
             if len(data) == 11 and data[0] == 0xCF:
                 self._handle_weight_update_t9146_t9147(data)
-        elif self._model_id in ["eufy T9148", "eufy T9149"]:
+        elif self._model_id in ["eufy T9148", "eufy T9149", "eufy T9150"]:
             if len(data) == 16 and data[0] == 0xCF and data[2] == 0x00:
-                self._handle_weight_update_t9148_t9149(data)
+                self._handle_weight_update_t9148_t9149_t9150(data)
 
     async def _read_battery_level(self):
         battery_bytes = await self._client.read_gatt_char(self._battery_char)
