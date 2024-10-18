@@ -1,6 +1,6 @@
 {
-  "domain": "eufylife_ble",
-  "name": "EufyLife",
+  "domain": "eufylife-smartscale",
+  "name": "EufyLife Smartscale",
   "bluetooth": [
     {
       "local_name": "eufy T9140"
@@ -16,13 +16,16 @@
     },
     {
       "local_name": "eufy T9149"
+    },
+    {
+      "local_name": "eufy T9150"
     }
   ],
-  "codeowners": ["@bdr99"],
+  "codeowners": ["@matthewbcooke"],
   "config_flow": true,
   "dependencies": ["bluetooth_adapters"],
   "documentation": "https://www.home-assistant.io/integrations/eufylife_ble",
   "integration_type": "device",
   "iot_class": "local_push",
-  "requirements": ["eufylife-ble-client==0.1.8"]
+  "requirements": ["eufylife-ble-client @ git+https://github.com/MatthewBCooke/eufylife-ble-client.git@main"]
 }
