@@ -1,3 +1,3 @@
 """Constants for the EufyLife integration."""
 
-DOMAIN = "eufylife-smartcale"
+DOMAIN = "eufylife-smartscale"
