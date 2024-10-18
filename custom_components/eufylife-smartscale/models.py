@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from eufylife_ble_client import EufyLifeBLEDevice
+from eufylife_ble import EufyLifeBLEDevice
 
 
 @dataclass

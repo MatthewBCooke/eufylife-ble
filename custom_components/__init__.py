@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from eufylife_ble_client import EufyLifeBLEDevice
+from eufylife_ble import EufyLifeBLEDevice
 
 from homeassistant.components import bluetooth
 from homeassistant.components.bluetooth.match import ADDRESS, BluetoothCallbackMatcher

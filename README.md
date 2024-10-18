@@ -1,4 +1,4 @@
-# EufyLife BLE Client
+# EufyLife BLE
 
 This is a library for parsing data from Eufy smart scales that use the EufyLife mobile app.
 
@@ -17,4 +17,4 @@ This is a library for parsing data from Eufy smart scales that use the EufyLife 
 
 Install this via pip:
 
-`pip install eufylife-ble-client`
+`pip install eufylife-ble`

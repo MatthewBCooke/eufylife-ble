@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "eufylife-ble-client"
+name = "eufylife-ble"
 version = "0.1.9"
 description = "A library to communicate with EufyLife Bluetooth devices."
-authors = ["Brandon Rothweiler <brandonrothweiler@gmail.com>"]
+authors = ["Matthew Cooke <matthew.cooke14@gmail.com"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/MatthewBCooke/eufylife-ble-client"
-packages = [{include = "eufylife_ble_client"}]
+homepage = "https://github.com/MatthewBCooke/eufylife-ble"
+packages = [{include = "eufylife_ble"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
