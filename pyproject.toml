@@ -9,7 +9,7 @@ homepage = "https://github.com/MatthewBCooke/eufylife-ble"
 packages = [{include = "eufylife-ble"}]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3."
 bleak = ">=0.19.0"
 bleak-retry-connector = ">=2.3.0"
 cryptography = ">=39.0"
