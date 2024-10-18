@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from eufylife_ble import MODEL_TO_NAME
+from eufylife-ble import MODEL_TO_NAME
 import voluptuous as vol
 
 from homeassistant.components.bluetooth import (
